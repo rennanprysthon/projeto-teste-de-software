@@ -16,6 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 
 @SpringBootTest
@@ -97,5 +100,18 @@ public class PersonalServiceTest {
         List<PersonalFieldError> errors = exception.getErrors();
         Assertions.assertEquals(3, errors.size());
         Assertions.assertTrue(errors.stream().allMatch(error -> error.getMessage().contains("blank")));
+    }
+
+    @DisplayName("Should return all personal registered when not passing geolocalization")
+    @Test
+    void shouldReturlAllPersonalRegistered() {
+        List<Personal> personals = LongStream.range(1, 5)
+                .mapToObj(i -> Personal.builder().cpf("123123123123").email(String.format("personal%d@gmail.com", i)).id(UUID.randomUUID()).build()).collect(Collectors.toList());
+
+        Mockito.when(repository.findAll()).thenReturn(personals);
+
+        List<Personal> fetched = personalService.findAll();
+
+        Assertions.assertEquals(4, fetched.size());
     }
 }
