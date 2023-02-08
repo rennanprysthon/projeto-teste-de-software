@@ -2,7 +2,7 @@ package br.edu.ifpe.recife.testes.model;
 
 import java.util.UUID;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,8 +16,12 @@ import lombok.Setter;
 @Builder
 @Entity
 public class Treino {
-	private Client client;
 	private String treinoA;
 	private String treinoB;
 	private String treinoC;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private UUID id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Client client;
 }
