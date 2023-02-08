@@ -78,4 +78,8 @@ public class PersonalService {
         validateUser(personal);
         return this.personalRepository.save(personal);
     }
+
+    public List<Personal> findAll() {
+        return this.personalRepository.findAll();
+    }
 }
