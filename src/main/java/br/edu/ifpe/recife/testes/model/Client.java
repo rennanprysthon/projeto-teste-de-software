@@ -3,6 +3,8 @@ package br.edu.ifpe.recife.testes.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -19,4 +21,6 @@ public class Client {
     private String cpf;
     private String email;
     private String password;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Treino> treino = new ArrayList<>();
 }
