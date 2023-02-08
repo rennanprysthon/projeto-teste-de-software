@@ -35,6 +35,7 @@ public class PersonalServiceTest {
             .password("lalala123")
             .email("fulano@emaill.com")
             .build();
+           
 
         personalService.register(personal);
 
