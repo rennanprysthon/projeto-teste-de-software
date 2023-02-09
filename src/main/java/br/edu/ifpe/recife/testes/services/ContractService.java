@@ -27,8 +27,8 @@ public class ContractService {
     }
 
     public void register(Contract contract) {
-        validateIfPersonalHasContracts(contract.getPersonal());
         validate(contract);
+        validateIfPersonalHasContracts(contract.getPersonal());
         contractRepository.save(contract);
     }
 
